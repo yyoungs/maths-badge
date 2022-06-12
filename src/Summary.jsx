@@ -1,0 +1,66 @@
+import {
+  faArrowLeft,
+  faListCheck,
+  faRocket,
+  faStopwatch,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PropTypes } from 'prop-types';
+import { React } from 'react';
+import styled from 'styled-components';
+
+import { badgeShape } from './badges';
+import Button from './Button';
+
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Screen = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.h1`
+  color: ${(props) => props.color || '#fff'};
+  font-size: 80px;
+`;
+
+/**
+ * Renders a summary of the badge details
+ */
+function Summary({ badge, onClose: handleBackClick, onDone: handleGoClick }) {
+  return (
+    <Screen>
+      <Header color={badge.color}>{badge.name}</Header>
+      <p>{badge.desc}</p>
+      <p>
+        <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} />
+        {badge.count} Questions
+      </p>
+      <p>
+        <FontAwesomeIcon icon={faStopwatch} style={{ marginRight: '10px' }} />
+        {badge.timeLimit} Minutes
+      </p>
+      <ButtonGroup>
+        <Button onClick={handleBackClick}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+          Back
+        </Button>
+        <Button onClick={handleGoClick}>
+          <FontAwesomeIcon icon={faRocket} className="fa-beat" />
+          Go
+        </Button>
+      </ButtonGroup>
+    </Screen>
+  );
+}
+
+Summary.propTypes = {
+  onClose: PropTypes.PropTypes.func.isRequired,
+  onDone: PropTypes.PropTypes.func.isRequired,
+  badge: PropTypes.PropTypes.shape(badgeShape).isRequired,
+};
+
+export default Summary;

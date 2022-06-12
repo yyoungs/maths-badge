@@ -1,4 +1,22 @@
-# Getting Started with Create React App
+# Maths Badge - My first react app
+
+This is app is my first bash at creating an app using react and react hooks. It is a simple maths test based on a primary school badge system using badge colours to represent increating difficulty.
+
+## To Do
+
+- [x] Use AirBnb ESLint rules
+- [x] Make responsive
+- [x] Add pass and fail sounds
+- [x] Add time running out warning
+- [x] Add pass Confetti
+- [x] Host on GitHub pages
+- [] Add intro beep sounds
+- [] Use relative font sizes
+- [] Fix volume inconsistencies
+- [] Tweak layout on phones, intro, title
+- [] Think about progress bars on phone
+- [] Typescript
+- [] Unit tests
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

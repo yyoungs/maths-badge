@@ -1,6 +1,7 @@
 {
   "name": "maths-badge",
   "version": "0.1.0",
+  "homepage": "https://yyoungs.github.io/maths-badge",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -26,7 +27,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint --fix"
+    "lint": "./node_modules/.bin/eslint --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +58,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "gh-pages": "^4.0.0",
     "prettier": "^2.6.2"
   }
 }

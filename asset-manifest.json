@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/maths-badge/static/css/main.84e46418.css",
-    "main.js": "/maths-badge/static/js/main.c13c462e.js",
+    "main.css": "/maths-badge/static/css/main.565c655f.css",
+    "main.js": "/maths-badge/static/js/main.c788c3ef.js",
     "static/js/845.40a366eb.chunk.js": "/maths-badge/static/js/845.40a366eb.chunk.js",
     "static/js/787.f0f21941.chunk.js": "/maths-badge/static/js/787.f0f21941.chunk.js",
     "static/media/tada.mp3": "/maths-badge/static/media/tada.5f4128d4372b6a2b67a4.mp3",
     "static/media/ow.mp3": "/maths-badge/static/media/ow.a0236b582260123cbc24.mp3",
     "static/media/pop-up-off.mp3": "/maths-badge/static/media/pop-up-off.83c6ba5b67be3cc15952.mp3",
     "index.html": "/maths-badge/index.html",
-    "main.84e46418.css.map": "/maths-badge/static/css/main.84e46418.css.map",
-    "main.c13c462e.js.map": "/maths-badge/static/js/main.c13c462e.js.map",
+    "main.565c655f.css.map": "/maths-badge/static/css/main.565c655f.css.map",
+    "main.c788c3ef.js.map": "/maths-badge/static/js/main.c788c3ef.js.map",
     "845.40a366eb.chunk.js.map": "/maths-badge/static/js/845.40a366eb.chunk.js.map",
     "787.f0f21941.chunk.js.map": "/maths-badge/static/js/787.f0f21941.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.84e46418.css",
-    "static/js/main.c13c462e.js"
+    "static/css/main.565c655f.css",
+    "static/js/main.c788c3ef.js"
   ]
 }

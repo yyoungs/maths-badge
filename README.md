@@ -1,6 +1,6 @@
 # Maths Badge - My first react app
 
-This is app is my first bash at creating an app using react and react hooks. It is a simple maths test based on a primary school badge system using badge colours to represent increating difficulty.
+This is app is my first bash at creating an app using react and react hooks. It is a simple maths test based on a primary school badge system using badge colours to represent increasing difficulty.
 
 ## To Do
 
@@ -14,7 +14,8 @@ This is app is my first bash at creating an app using react and react hooks. It 
 - [] Use relative font sizes
 - [] Fix volume inconsistencies
 - [] Tweak layout on phones, intro, title
-- [] Think about progress bars on phone
+- [x] Fix progress bars on phone with keyboard
+- [] Look at accessibility, colour contrasts etc
 - [] Typescript
 - [] Unit tests
 

@@ -12,8 +12,9 @@ const Wrapper = styled.span`
     text-align: center;
   }
   & > input {
-    font-size: 100px;
-    width: 230px;
+    width: 4ch;
+    font-size: inherit;
+    outline: none;
   }
 `;
 
@@ -46,7 +47,7 @@ function Answer({ onAnswer: answerQuestion }) {
         name="answer"
         maxLength="4"
         // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus="true"
+        autoFocus
         autoComplete="off"
         inputMode="numeric"
         pattern="[0-9,-]*"

@@ -17,22 +17,29 @@ import ProgressBar from './ProgressBar';
 import Question from './Question';
 
 const QuestionRow = styled.div`
-  font-size: calc(100px + 2vmin);
+  font-size: 7rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 20px;
   margin-bottom: 10vh;
   @media (max-width: 768px) {
+    margin-bottom: 5vh;
     flex-direction: column;
     gap: 0;
+  }
+`;
+
+const Equals = styled.span`
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
 const Progress = styled.div`
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 90%;
   height: 40px;
   align-items: center;
 `;
@@ -100,16 +107,21 @@ function Exam({
     <>
       <QuestionRow>
         <Question question={exam.questions[exam.currentQuestion].text} />
-        <span> = </span>
+        <Equals> = </Equals>
         <Answer onAnswer={handleAnswer} />
       </QuestionRow>
       <Progress>
-        <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} />
+        <FontAwesomeIcon
+          icon={faListCheck}
+          fixedWidth
+          style={{ marginRight: '10px' }}
+        />
         <ProgressBar bgcolor="#04AA6D" completed={progress(exam)} />
       </Progress>
       <Progress>
         <FontAwesomeIcon
           icon={faStopwatch}
+          fixedWidth
           shake={time.warning}
           style={{ marginRight: '10px' }}
           color={time.warning ? 'orange' : 'inherit'}

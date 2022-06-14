@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/maths-badge/static/css/main.85161cb9.css",
-    "main.js": "/maths-badge/static/js/main.e865a975.js",
+    "main.js": "/maths-badge/static/js/main.f7b454b6.js",
     "static/js/845.40a366eb.chunk.js": "/maths-badge/static/js/845.40a366eb.chunk.js",
     "static/js/787.f0f21941.chunk.js": "/maths-badge/static/js/787.f0f21941.chunk.js",
     "static/media/tada.mp3": "/maths-badge/static/media/tada.5f4128d4372b6a2b67a4.mp3",
@@ -9,12 +9,12 @@
     "static/media/pop-up-off.mp3": "/maths-badge/static/media/pop-up-off.83c6ba5b67be3cc15952.mp3",
     "index.html": "/maths-badge/index.html",
     "main.85161cb9.css.map": "/maths-badge/static/css/main.85161cb9.css.map",
-    "main.e865a975.js.map": "/maths-badge/static/js/main.e865a975.js.map",
+    "main.f7b454b6.js.map": "/maths-badge/static/js/main.f7b454b6.js.map",
     "845.40a366eb.chunk.js.map": "/maths-badge/static/js/845.40a366eb.chunk.js.map",
     "787.f0f21941.chunk.js.map": "/maths-badge/static/js/787.f0f21941.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85161cb9.css",
-    "static/js/main.e865a975.js"
+    "static/js/main.f7b454b6.js"
   ]
 }

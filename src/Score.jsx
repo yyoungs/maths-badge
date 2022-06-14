@@ -3,10 +3,10 @@ import {
   faRotateLeft,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect } from 'react';
 import Confetti from 'react-confetti';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropTypes } from 'prop-types';
-import React from 'react';
 import styled from 'styled-components';
 import useSound from 'use-sound';
 
@@ -14,6 +14,7 @@ import failSound from './ow.mp3';
 import passSound from './tada.mp3';
 
 import Button from './Button';
+import useWindowDimensions from './windowDimensionsHook';
 
 const Header = styled.header`
   font-size: calc(100px + 2vmin);
@@ -48,7 +49,7 @@ function Score({
 }) {
   const [playPass] = useSound(passSound, { volume: 0.5 });
   const [playFail] = useSound(failSound, { volume: 0.5 });
-
+  const { width, height } = useWindowDimensions();
   const score = questions.reduce(
     (acc, curr) => (curr.givenAnser === curr.correctAnswer ? acc + 1 : acc),
     0
@@ -84,15 +85,20 @@ function Score({
   ));
 
   const examPassed = score === questions.length;
-  if (examPassed) {
-    playPass();
-  } else {
-    playFail();
-  }
+
+  // useEffect to only play sound once
+  // but allow screen resize for confetti
+  useEffect(() => {
+    if (examPassed) {
+      playPass();
+    } else {
+      playFail();
+    }
+  }, [examPassed, playFail, playPass]);
 
   return (
     <div style={{ width: '100%' }}>
-      {examPassed && <Confetti />}
+      {examPassed && <Confetti width={width} height={height} />}
       <Header>
         Score {score}/{questions.length}
       </Header>
@@ -100,11 +106,11 @@ function Score({
       <ButtonGroup>
         <Button onClick={handleAgainClick}>
           <FontAwesomeIcon icon={faRotateLeft} />
-          Again
+          <span>Again</span>
         </Button>
         <Button onClick={handleDoneClick}>
           <FontAwesomeIcon icon={faCheck} />
-          Done
+          <span>Done</span>
         </Button>
       </ButtonGroup>
     </div>

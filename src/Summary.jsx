@@ -15,6 +15,7 @@ import Button from './Button';
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 80px;
 `;
 
 const Screen = styled.div`
@@ -33,7 +34,9 @@ const Header = styled.h1`
 function Summary({ badge, onClose: handleBackClick, onDone: handleGoClick }) {
   return (
     <Screen>
-      <Header color={badge.color}>{badge.name}</Header>
+      <Header color={badge.color}>
+        {typeof badge.name === 'function' ? badge.name() : badge.name}
+      </Header>
       <p>{badge.desc}</p>
       <p>
         <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} />
@@ -46,11 +49,11 @@ function Summary({ badge, onClose: handleBackClick, onDone: handleGoClick }) {
       <ButtonGroup>
         <Button onClick={handleBackClick}>
           <FontAwesomeIcon icon={faArrowLeft} />
-          Back
+          <span>Back</span>
         </Button>
         <Button onClick={handleGoClick}>
           <FontAwesomeIcon icon={faRocket} className="fa-beat" />
-          Go
+          <span>Go</span>
         </Button>
       </ButtonGroup>
     </Screen>

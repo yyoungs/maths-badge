@@ -1,5 +1,4 @@
 import {
-  faListCheck,
   faPersonRunning,
   faStopwatch,
 } from '@fortawesome/free-solid-svg-icons';
@@ -39,7 +38,8 @@ const Equals = styled.span`
 const Progress = styled.div`
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 100%;
+  max-width: 690px;
   height: 40px;
   align-items: center;
 `;
@@ -86,6 +86,7 @@ function Exam({
   });
 
   const progress = (e) => e.currentQuestion / (e.questions.length / 100);
+  const progressText = (e) => `${e.currentQuestion}/${e.questions.length}`;
 
   const handleAnswer = (answer) => {
     setExam((e) => {
@@ -111,21 +112,17 @@ function Exam({
         <Answer onAnswer={handleAnswer} />
       </QuestionRow>
       <Progress>
-        <FontAwesomeIcon
-          icon={faListCheck}
-          fixedWidth
-          style={{ marginRight: '10px' }}
-        />
+        <span style={{ width: 60 }}>{progressText(exam)}</span>
         <ProgressBar bgcolor="#04AA6D" completed={progress(exam)} />
       </Progress>
       <Progress>
-        <FontAwesomeIcon
-          icon={faStopwatch}
-          fixedWidth
-          shake={time.warning}
-          style={{ marginRight: '10px' }}
-          color={time.warning ? 'orange' : 'inherit'}
-        />
+        <span style={{ width: 60 }}>
+          <FontAwesomeIcon
+            icon={faStopwatch}
+            shake={time.warning}
+            color={time.warning ? 'orange' : 'inherit'}
+          />
+        </span>
         <ProgressBar bgcolor="#00ccff" completed={time.progress} />
       </Progress>
       <Button onClick={handleClose} style={{ marginTop: '15vh' }}>

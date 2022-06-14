@@ -13,9 +13,16 @@ const Button = styled.button`
   &:hover {
     filter: brightness(80%);
   }
-
   > svg {
     margin-right: 8px;
+  }
+  @media (max-width: 620px) {
+    > svg {
+      margin-right: 0;
+    }
+    > span {
+      display: none;
+    }
   }
 `;
 

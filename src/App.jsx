@@ -19,7 +19,7 @@ const Wonky = styled.div`
 function App() {
   const [state, setState] = useState('home');
   const [badge, setBadge] = useState(null);
-  const [questions, setQuestions] = useState([]);
+  const [result, setResult] = useState({ questions: [] });
 
   const handleBadgeClick = (index) => {
     setBadge(badges[index]);
@@ -38,14 +38,14 @@ function App() {
     setState('exam');
   };
 
-  const handleExamDone = (q) => {
-    setQuestions(q);
+  const handleExamDone = (newResult) => {
+    setResult(newResult);
     setState('score');
   };
 
   const reset = () => {
     setBadge(null);
-    setQuestions([]);
+    setResult({ questions: [] });
     setState('home');
   };
 
@@ -58,7 +58,7 @@ function App() {
   };
 
   const handleAgain = () => {
-    setQuestions([]);
+    setResult({ questions: [] });
     setState('intro');
   };
 
@@ -96,7 +96,7 @@ function App() {
           <Score
             onDone={handleScoreDone}
             onAgain={handleAgain}
-            questions={questions}
+            result={result}
           />
         );
       case 'home':

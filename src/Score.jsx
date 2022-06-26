@@ -43,7 +43,7 @@ const Grid = styled.ul`
  * Renders a grid of questions results
  */
 function Score({
-  questions,
+  result: { questions, finalDuration },
   onDone: handleDoneClick,
   onAgain: handleAgainClick,
 }) {
@@ -102,6 +102,7 @@ function Score({
       <Header>
         Score {score}/{questions.length}
       </Header>
+      {finalDuration && <p>{finalDuration}</p>}
       <Grid>{gridItems}</Grid>
       <ButtonGroup>
         <Button onClick={handleAgainClick}>
@@ -118,13 +119,16 @@ function Score({
 }
 
 Score.propTypes = {
-  questions: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string,
-      correctAnswer: PropTypes.string,
-      givenAnser: PropTypes.string,
-    })
-  ).isRequired,
+  result: PropTypes.shape({
+    questions: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string,
+        correctAnswer: PropTypes.string,
+        givenAnser: PropTypes.string,
+      })
+    ).isRequired,
+    finalDuration: PropTypes.string,
+  }).isRequired,
   onDone: PropTypes.func.isRequired,
   onAgain: PropTypes.func.isRequired,
 };

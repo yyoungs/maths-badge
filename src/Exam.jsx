@@ -69,7 +69,7 @@ function Exam({
   const checkTime = () => {
     const now = DateTime.utc();
     if (duration.end <= now) {
-      done(exam.questions);
+      done({ questions: exam.questions });
     } else {
       const fullDuration = duration.end.diff(duration.start).toObject();
       const currentDuration = now.diff(duration.start).toObject();
@@ -98,7 +98,9 @@ function Exam({
         currentQuestion,
       };
       if (currentQuestion === e.questions.length) {
-        done(questions);
+        const now = DateTime.utc();
+        const finalDuration = now.diff(duration.start).toFormat("m'm' s's'");
+        done({ questions, finalDuration });
       }
       return newExam;
     });

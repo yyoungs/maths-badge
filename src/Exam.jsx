@@ -44,14 +44,8 @@ const Progress = styled.div`
   align-items: center;
 `;
 
-/**
- * Exam component renders the question text and answer input
- */
-function Exam({
-  onDone: done,
-  onClose: handleClose,
-  badge: { count, questionTypes, timeLimit },
-}) {
+const useExamState = ({ count, questionTypes, timeLimit }, done) => {
+  // Use lazy load set the initial duration data once
   const [duration] = useState(() => {
     const now = DateTime.utc();
     return {
@@ -60,50 +54,97 @@ function Exam({
       warning: now.plus({ minutes: timeLimit }).minus({ seconds: 20 }),
     };
   });
-  const [time, setTime] = useState({ progress: 0, warning: false });
+  const [time, setTime] = useState({ value: 0, warning: false });
+  // Use lazy load to only create the exam once
   const [exam, setExam] = useState(() => ({
     currentQuestion: 0,
     questions: createExam(count, questionTypes),
   }));
 
-  const checkTime = () => {
-    const now = DateTime.utc();
-    if (duration.end <= now) {
-      done({ questions: exam.questions });
-    } else {
+  useEffect(() => {
+    /**
+     * Work out the time progress and if we have hit
+     * the warning threashold
+     */
+    const createTime = (now) => {
       const fullDuration = duration.end.diff(duration.start).toObject();
       const currentDuration = now.diff(duration.start).toObject();
-      const progress =
+      const value =
         currentDuration.milliseconds / (fullDuration.milliseconds / 100);
       const warning = now >= duration.warning;
-      setTime({ progress, warning });
-    }
-  };
+      return { value, warning };
+    };
 
-  useEffect(() => {
+    /**
+     * Update the time process and finish the exam
+     * if we are past the time limit
+     */
+    const checkTime = () => {
+      const now = DateTime.utc();
+      if (duration.end <= now) {
+        done({ questions: exam.questions });
+      } else {
+        const newTime = createTime(now);
+        setTime(newTime);
+      }
+    };
+
     const timer = setInterval(() => checkTime(), 1000);
     return () => clearInterval(timer);
   });
+
+  /**
+   * Calculate time taken and call done cb
+   */
+  const finishExam = (questions) => {
+    const now = DateTime.utc();
+    const finalDuration = now.diff(duration.start).toFormat("m'm' s's'");
+    done({ questions, finalDuration });
+  };
+
+  /**
+   * Merge the answer into the exam by copying it
+   * and updating the values then returning the
+   * new instance
+   */
+  const updateExam = (oldExam, answer) => {
+    const questions = [...oldExam.questions];
+    questions[exam.currentQuestion].givenAnser = answer;
+    const currentQuestion = oldExam.currentQuestion + 1;
+    return {
+      questions,
+      currentQuestion,
+    };
+  };
+
+  /**
+   * Set the answer in state and finish the exam
+   * if we have answered all the questions
+   */
+  const setAnswer = (answer) => {
+    setExam((oldExam) => {
+      const newExam = updateExam(oldExam, answer);
+      if (newExam.currentQuestion === oldExam.questions.length) {
+        finishExam(newExam.questions);
+      }
+      return newExam;
+    });
+  };
+
+  return { exam, time, setAnswer };
+};
+
+/**
+ * Exam component renders the question text and answer input
+ */
+function Exam({ onDone: done, onClose: handleClose, badge }) {
+  const { exam, time, setAnswer } = useExamState(badge, done);
 
   const progress = (e) => e.currentQuestion / (e.questions.length / 100);
   const progressText = (e) => `${e.currentQuestion}/${e.questions.length}`;
 
   const handleAnswer = (answer) => {
-    setExam((e) => {
-      const questions = [...exam.questions];
-      questions[e.currentQuestion].givenAnser = answer;
-      const currentQuestion = e.currentQuestion + 1;
-      const newExam = {
-        questions,
-        currentQuestion,
-      };
-      if (currentQuestion === e.questions.length) {
-        const now = DateTime.utc();
-        const finalDuration = now.diff(duration.start).toFormat("m'm' s's'");
-        done({ questions, finalDuration });
-      }
-      return newExam;
-    });
+    setAnswer(answer);
   };
 
   return (
@@ -125,7 +166,7 @@ function Exam({
             color={time.warning ? 'orange' : 'inherit'}
           />
         </span>
-        <ProgressBar bgcolor="#00ccff" completed={time.progress} />
+        <ProgressBar bgcolor="#00ccff" completed={time.value} />
       </Progress>
       <Button onClick={handleClose} style={{ marginTop: '15vh' }}>
         <FontAwesomeIcon icon={faPersonRunning} />
